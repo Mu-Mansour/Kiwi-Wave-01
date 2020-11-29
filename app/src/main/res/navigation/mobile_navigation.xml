@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/splaaaaaaash">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.kiwi.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/noInternet"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.kiwi.ui.searchFragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/noInternet"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.kiwi.ui.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notificationsFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/noInternet"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileragment2"
+        android:name="com.example.kiwi.ui.profile.Profileragment"
+        android:label="fragment_profileragment"
+        tools:layout="@layout/fragment_profileragment" >
+        <action
+            android:id="@+id/action_profileragment2_to_accountSettings"
+            app:destination="@id/accountSettings"
+            app:popUpTo="@id/accountSettings"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileragment2_to_homeMessagesFragment"
+            app:destination="@id/homeMessagesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeMessagesFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileragment2_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/profileragment2"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSettings"
+        android:name="com.example.kiwi.ui.accountSettings.AccountSettings"
+        android:label="fragment_account_settings"
+        tools:layout="@layout/fragment_account_settings" >
+        <action
+            android:id="@+id/action_accountSettings_to_profileragment2"
+            app:destination="@id/profileragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/profileragment2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_accountSettings_to_splaaaaaaash"
+            app:destination="@id/splaaaaaaash"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splaaaaaaash"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.kiwi.ui.logIn.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_profileragment2"
+            app:destination="@id/profileragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.kiwi.ui.signUpFragment.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/splaaaaaaash"
+        android:name="com.example.kiwi.ui.Splash.splaaaaaaash"
+        android:label="fragment_splaaaaaaash"
+        tools:layout="@layout/fragment_splaaaaaaash" >
+        <action
+            android:id="@+id/action_splaaaaaaash_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splaaaaaaash"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splaaaaaaash_to_profileragment2"
+            app:destination="@id/profileragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splaaaaaaash"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.kiwi.ui.post.PostFragment"
+        android:label="fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/noInternet"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeMessagesFragment"
+        android:name="com.example.kiwi.ui.HomeKiwiMessages.HomeMessagesFragment"
+        android:label="home_messages_fragment"
+        tools:layout="@layout/home_messages_fragment" >
+        <action
+            android:id="@+id/action_homeMessagesFragment_to_profileragment2"
+            app:destination="@id/profileragment2"
+            app:popUpTo="@id/profileragment2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeMessagesFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeMessagesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.kiwi.ui.MessageChatFragment.ChatFragment"
+        android:label="fragment_messiging_chat"
+        tools:layout="@layout/fragment_messiging_chat" >
+        <argument
+            android:name="TheUser"
+            app:argType="string"
+             />
+        <action
+            android:id="@+id/action_chatFragment_to_homeMessagesFragment"
+            app:destination="@id/homeMessagesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeMessagesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/noInternet"
+        android:name="com.example.kiwi.NoInternet"
+        android:label="fragment_no_internet"
+        tools:layout="@layout/fragment_no_internet" />
+</navigation>

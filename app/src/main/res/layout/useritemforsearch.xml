@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin=".5dp"
+    android:background="@drawable/radious">
+
+    <TextView
+        android:id="@+id/followingsearchAdapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="0"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/followerssearchAdapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="0"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/followingsearchAdapter" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintStart_toEndOf="@+id/button3foradapterSearch"
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:srcCompat="@drawable/ic_following" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_follows" />
+
+    <ImageView
+        android:id="@+id/circleImageViewforAdaptersearch"
+        android:layout_width="123dp"
+        android:layout_height="78dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/profile"
+        app:layout_constraintCircleRadius="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2forsearchAdapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/architects_daughter"
+        android:text="User Name"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/circleImageViewforAdaptersearch"
+        app:layout_constraintTop_toTopOf="@+id/circleImageViewforAdaptersearch" />
+
+    <Button
+        android:id="@+id/button3foradapterSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_plant"
+        android:fontFamily="@font/berkshire_swash"
+        android:text="Follow"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/circleImageViewforAdaptersearch"
+        app:layout_constraintStart_toStartOf="@+id/circleImageViewforAdaptersearch"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageViewforAdaptersearch" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/berkshire_swash"
+        android:text="Bio"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView2forsearchAdapter"
+        app:layout_constraintStart_toStartOf="@+id/textView2forsearchAdapter"
+        app:layout_constraintTop_toBottomOf="@+id/textView2forsearchAdapter" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:menuCategory="secondary"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:menuCategory="secondary"
+        android:icon="@drawable/search_icon"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/postFragment"
+        android:icon="@drawable/add"
+        android:menuCategory="secondary"
+        android:title="@string/kiwis" />
+
+    <item
+        android:id="@+id/notificationsFragment"
+        android:icon="@drawable/heart"
+        android:menuCategory="secondary"
+        android:title="@string/title_notifications" />
+
+    <item
+        android:id="@+id/profileragment2"
+        android:menuCategory="secondary"
+        android:icon="@drawable/profile_pic"
+        android:title="@string/profile" />
+
+</menu>

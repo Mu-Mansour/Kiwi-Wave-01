@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "362588539049",
+    "firebase_url": "https://kiwi-5e98e.firebaseio.com",
+    "project_id": "kiwi-5e98e",
+    "storage_bucket": "kiwi-5e98e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362588539049:android:785291d95d57d9397881b8",
+        "android_client_info": {
+          "package_name": "com.example.kiwi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362588539049-1h75tp1eebd21b7288ig9tg7rsmrqdo2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kiwi",
+            "certificate_hash": "78616dc08dd78f3d6ee3f75a393b739b668c3dfd"
+          }
+        },
+        {
+          "client_id": "362588539049-q1r4efk4q9al5v4miv7q7ajtupu7unng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaiU5t4LmQ8SQX4uFCFTZZbUkIyP-LLL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362588539049-q1r4efk4q9al5v4miv7q7ajtupu7unng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Kiwi</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item">Item</string>
+    <string name="search">Search</string>
+
+    <string name="profile">Profile</string>
+    <string name="heart">Heart</string>
+    <string name="kiwis">Kiwis</string>
+    <string name="message">Message</string>
+    <string name="please_enter_your_e_mail_adress">Please Enter Your E-Mail adress</string>
+    <string name="welcome_to_kiwi">Welcome To Kiwi</string>
+    <string name="please_enter_your_password">Please Enter Your Password</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="remove_them_all">Remove Them All</string>
+    <string name="check_your_internet_connection">Check Your Internet Connection</string>
+</resources>
