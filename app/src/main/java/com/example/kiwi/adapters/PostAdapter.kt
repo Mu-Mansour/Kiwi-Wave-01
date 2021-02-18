@@ -39,7 +39,6 @@ class PostAdapter (): RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder>() 
         var thePosterthecontenet = itemView.thecontenet
         var thePosterUserName = itemView.posterUserName
         var thePostimage = itemView.postImage
-
         var thePostmessage = itemView.sendAmessageText
         var thePostmessageimage = itemView.likeImage
         init {
@@ -83,7 +82,6 @@ class PostAdapter (): RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder>() 
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
                     }
                 })
 
@@ -155,7 +153,6 @@ class PostAdapter (): RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder>() 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
 

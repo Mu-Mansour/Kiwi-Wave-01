@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.accountSettings.AccountSettings" >
+    tools:context=".ui.accountSettings.AccountSettings">
 
     <ImageView
         android:id="@+id/CancelChanging"
@@ -26,39 +26,26 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:srcCompat="@drawable/ic_baseline_check_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_check_24"
         app:tint="@color/colorGreen" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/settingProfileImage"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CancelChanging" />
 
     <TextView
         android:id="@+id/changeImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
         android:fontFamily="@font/architects_daughter"
         android:includeFontPadding="false"
         android:text="Change Image"
         android:textAllCaps="true"
         android:textColor="@color/colorGreen"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/settingProfileImage"
-        app:layout_constraintStart_toStartOf="@+id/settingProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/settingProfileImage" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfileImageFromSettings" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/theEmaileinputinsignUp"
@@ -137,5 +124,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ProfileImageFromSettings"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alreadyChanged"
+        tools:src="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

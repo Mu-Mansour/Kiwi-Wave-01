@@ -22,13 +22,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class splaaaaaaash : Fragment() {
+class Splaaaaaaash : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_splaaaaaaash, container, false)
     }
 
@@ -45,7 +44,7 @@ class splaaaaaaash : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(1000)
 
-                findNavController().navigate(splaaaaaaashDirections.actionSplaaaaaaashToProfileragment2())
+                findNavController().navigate(SplaaaaaaashDirections.actionSplaaaaaaashToProfileragment2())
 
                 }
 
@@ -53,7 +52,7 @@ class splaaaaaaash : Fragment() {
         } else {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(1000)
-                findNavController().navigate(splaaaaaaashDirections.actionSplaaaaaaashToLogInFragment())
+                findNavController().navigate(SplaaaaaaashDirections.actionSplaaaaaaashToLogInFragment())
             }
 
         }

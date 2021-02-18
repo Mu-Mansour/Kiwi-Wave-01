@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.notification_layout_fornotifications.view.
 
 class NotificationsAdapter(): RecyclerView.Adapter<NotificationsAdapter.NotificatiosViewHolder>() {
 
-    private var theList:ArrayList<Notification> = ArrayList<Notification>()
+    private var theList:ArrayList<Notification> = ArrayList()
 
 
 
@@ -33,7 +33,6 @@ class NotificationsAdapter(): RecyclerView.Adapter<NotificationsAdapter.Notifica
 
     override fun onBindViewHolder(holder: NotificatiosViewHolder, position: Int) {
 
-            //for TheLiftImage
           getTheNotifierName(theList[position]).addValueEventListener(
               object : ValueEventListener {
                   override fun onDataChange(snapshot: DataSnapshot) {
@@ -43,10 +42,8 @@ class NotificationsAdapter(): RecyclerView.Adapter<NotificationsAdapter.Notifica
                   }
 
                   override fun onCancelled(error: DatabaseError) {
-                      TODO("Not yet implemented")
                   }
               })
-            // for The Nmae
           getTheNotifierimage(theList[position]).addValueEventListener(
               object : ValueEventListener {
                   override fun onDataChange(snapshot: DataSnapshot) {
@@ -58,10 +55,8 @@ class NotificationsAdapter(): RecyclerView.Adapter<NotificationsAdapter.Notifica
                   }
 
                   override fun onCancelled(error: DatabaseError) {
-                      TODO("Not yet implemented")
                   }
               })
-            // forThePostImage
           getpostImage(theList[position]).addValueEventListener(
               object : ValueEventListener {
               override fun onDataChange(snapshot: DataSnapshot) {
@@ -73,7 +68,6 @@ class NotificationsAdapter(): RecyclerView.Adapter<NotificationsAdapter.Notifica
               }
 
               override fun onCancelled(error: DatabaseError) {
-                  TODO("Not yet implemented")
               }
           })
 

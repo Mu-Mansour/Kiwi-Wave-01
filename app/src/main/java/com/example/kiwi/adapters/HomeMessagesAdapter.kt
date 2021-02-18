@@ -32,9 +32,12 @@ class HomeMessagesAdapter( ): RecyclerView.Adapter<HomeMessagesAdapter.TheViewHo
 
 
             itemView.setOnClickListener {
-                var theUserToBesSent:String =theFriends[adapterPosition]
+                if (adapterPosition!= RecyclerView.NO_POSITION)
+                {
+                    var theUserToBesSent:String =theFriends[adapterPosition]
+                    itemView.findNavController().navigate((HomeMessagesFragmentDirections.actionHomeMessagesFragmentToChatFragment(theUserToBesSent)))
+                }
 
-                itemView.findNavController().navigate((HomeMessagesFragmentDirections.actionHomeMessagesFragmentToChatFragment(theUserToBesSent)))
 
             }
 
@@ -55,7 +58,6 @@ class HomeMessagesAdapter( ): RecyclerView.Adapter<HomeMessagesAdapter.TheViewHo
 
     override fun onBindViewHolder(holder: TheViewHolderHome, position: Int) {
         makeTheFriend(holder.theFriendImage,holder.theFriendname,theFriends[position])
-
         holder.setIsRecyclable(false)
 
     }
@@ -66,11 +68,6 @@ class HomeMessagesAdapter( ): RecyclerView.Adapter<HomeMessagesAdapter.TheViewHo
     private fun makeTheFriend(imageview:ImageView,text:TextView ,user:String)
     {
          var theuserIN =FirebaseDatabase.getInstance().reference.child("Users").child(user)
-
-
-
-
-
                 theuserIN.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.exists()) {
@@ -85,7 +82,6 @@ class HomeMessagesAdapter( ): RecyclerView.Adapter<HomeMessagesAdapter.TheViewHo
                         }
 
                         override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
                         }
 
                     })

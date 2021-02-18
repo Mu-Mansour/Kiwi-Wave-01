@@ -24,11 +24,6 @@ import javax.inject.Inject
 
 class ProfileRVAdapter: RecyclerView.Adapter<ProfileRVAdapter.TheViewHolder>() {
 
-
-
-
-
-
     val thelistDifferCallBack= object : DiffUtil.ItemCallback<ThePostForRoom>()
     {
         override fun areItemsTheSame(oldItem: ThePostForRoom, newItem: ThePostForRoom): Boolean {
@@ -36,9 +31,6 @@ class ProfileRVAdapter: RecyclerView.Adapter<ProfileRVAdapter.TheViewHolder>() {
         }
 
         override fun areContentsTheSame(oldItem: ThePostForRoom, newItem: ThePostForRoom): Boolean {
- //     here we compare everything in the memory so if there are 2 objects with 1 slight differ it will return true
-
-
             return oldItem.hashCode() == newItem.hashCode()
         }
 
@@ -47,18 +39,13 @@ class ProfileRVAdapter: RecyclerView.Adapter<ProfileRVAdapter.TheViewHolder>() {
     val theDiffrence= AsyncListDiffer(this,thelistDifferCallBack)
     fun submitTheList(list: ArrayList<ThePostForRoom>)=theDiffrence.submitList(list)
 
-
-
-
     inner class TheViewHolder (itemview: View):RecyclerView.ViewHolder(itemview)
     {
 
         val theimageFromprofile=itemview.thePostFromProfile
         val thecontenetFromProfile=itemview.theContenetFromProfile
 
-        init {
 
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TheViewHolder {

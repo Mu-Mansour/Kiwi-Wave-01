@@ -1,37 +1,51 @@
 package com.example.kiwi.ui.signUpFragment
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.kiwi.Repos.TheAppRepo
-import com.google.android.gms.tasks.Task
-import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.AuthResult
-import kotlinx.coroutines.launch
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
-class SignUpModel @ViewModelInject constructor(private val theAppRepoforall: TheAppRepo): ViewModel() {
-    var passwordfromSignIn: TextInputLayout?= null
-    var theEmaileinputinsignIn: TextInputLayout?= null
-    var confirmpassword: TextInputLayout?= null
-    var userNamefirsttime: TextInputLayout?= null
+class SignUpModel @ViewModelInject constructor(): ViewModel() {
+    var passwordfromSignIn: String?= null
+    var theEmaileinputinsignIn: String?= null
+    var userNamefirsttime: String?= null
+    val theResultFromNewAccountCreation:MutableLiveData<Boolean> = MutableLiveData()
+    val theError:MutableLiveData<String> = MutableLiveData()
+    val netWorkFound:MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getTheItemsForFiewModel(passwordfromSignIn1: TextInputLayout,theEmaileinputinsignIn1: TextInputLayout,confirmpassword1: TextInputLayout?,userNamefirsttime1: TextInputLayout)
+    fun createAnewAccount()
     {
-        passwordfromSignIn=passwordfromSignIn1
-        theEmaileinputinsignIn=theEmaileinputinsignIn1
-        confirmpassword=confirmpassword1
-        userNamefirsttime=userNamefirsttime1
+        if (theEmaileinputinsignIn!= null && passwordfromSignIn!= null )
+        {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(theEmaileinputinsignIn!!,
+                passwordfromSignIn!!
+            ).addOnCompleteListener {
+                if (it.isSuccessful)
+                {
+                    val theUserMap= HashMap<String,Any>()
+                    theUserMap["uid"]=FirebaseAuth.getInstance().currentUser!!.uid
+                    theUserMap["username"]=userNamefirsttime!!
+                    theUserMap["email"]=theEmaileinputinsignIn!!
+                    theUserMap["bio"]="Iam a Kiwi"
+                    theUserMap["image"]="https://firebasestorage.googleapis.com/v0/b/kiwi-5e98e.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=716b5e45-4c33-48fc-b42c-36afc9c4ca57"
+                    FirebaseDatabase.getInstance().reference.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(theUserMap).addOnCompleteListener {
+                        FirebaseAuth.getInstance().signOut()
+                        theError.value= null
+                        theResultFromNewAccountCreation.value=true
+                    }
+                }
+                else
+                {
+                    theResultFromNewAccountCreation.value=false
+                    theError.value=it.exception!!.message
+                }
+
+
+            }
+        }
 
     }
-    fun signOut()=theAppRepoforall.signOut()
-    fun safeTheUserInDB():Task<Void>?= theAppRepoforall.safeUserInfo(userNamefirsttime!!,theEmaileinputinsignIn!!)
-
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun createTheAuth(): Task<AuthResult>?=theAppRepoforall.createAccount(passwordfromSignIn!!,theEmaileinputinsignIn!!,confirmpassword!!,userNamefirsttime!!)
-
 
 
 

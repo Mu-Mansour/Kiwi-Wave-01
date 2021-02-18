@@ -80,6 +80,12 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/splaaaaaaash"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_accountSettings_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/accountSettings"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -100,6 +106,12 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/logInFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_logInFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -112,10 +124,16 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signUpFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splaaaaaaash"
-        android:name="com.example.kiwi.ui.Splash.splaaaaaaash"
+        android:name="com.example.kiwi.ui.Splash.Splaaaaaaash"
         android:label="fragment_splaaaaaaash"
         tools:layout="@layout/fragment_splaaaaaaash" >
         <action
@@ -158,6 +176,12 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/homeMessagesFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeMessagesFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeMessagesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -174,10 +198,16 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/homeMessagesFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_chatFragment_to_noInternet"
+            app:destination="@id/noInternet"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/noInternet"
-        android:name="com.example.kiwi.NoInternet"
+        android:name="com.example.kiwi.ui.General.NoInternet"
         android:label="fragment_no_internet"
         tools:layout="@layout/fragment_no_internet" />
 </navigation>

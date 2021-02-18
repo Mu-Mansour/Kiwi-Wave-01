@@ -1,6 +1,8 @@
 package com.example.kiwi.ui.signUpFragment
 
-/*import com.example.kiwi.modules.FireBaseRefOfUsers*/
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,20 +17,25 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     val theViewModel:SignUpModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        theViewModel.netWorkFound.value=isNetworkAvailable(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val thisView=inflater.inflate(R.layout.fragment_sign_up,container,false)
-        theViewModel.getTheItemsForFiewModel(thisView.passwordfromSignUP,thisView.theEmaileinputinsignUp,thisView.confirmpassword,thisView.userNamefirsttimeSignUp)
         return thisView
     }
 
@@ -36,79 +43,96 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         alreadyHaveaccount.setOnClickListener {
 
             findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLogInFragment())
         }
+        theViewModel.netWorkFound.observe(viewLifecycleOwner,{
+         it?.let {
+            if (!it)
+            {
+               findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToNoInternet())
+
+            }
+         }
+      })
 
         theSignUp.setOnClickListener {
 
-           var theAuth= theViewModel.createTheAuth()
-            if (theAuth==null)
+            if (passwordfromSignUP.editText!!.text.isEmpty()
+                || theEmaileinputinsignUp.editText!!.text.isEmpty()|| confirmpassword.editText!!.text.isEmpty()||
+                userNamefirsttimeSignUp.editText!!.text.isEmpty())
             {
-                Snackbar.make(requireView(), "failed to create an account", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
+                Snackbar.make(requireView(), "Empty Field", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
+                    R.color.colorAccent))
+                    .show()
+            }
+            else if (passwordfromSignUP.editText!!.text.toString() != confirmpassword.editText!!.text.toString() )
+            {
+                Snackbar.make(requireView(), "check Your Confirmed password", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
                     R.color.colorAccent))
                     .show()
             }
             else
             {
-                theAuth.addOnCompleteListener {
-                    if (it.isSuccessful)
+                theViewModel.passwordfromSignIn=passwordfromSignUP.editText!!.text.toString()
+                theViewModel.theEmaileinputinsignIn=theEmaileinputinsignUp.editText!!.text.toString()
+                theViewModel.userNamefirsttime=userNamefirsttimeSignUp.editText!!.text.toString()
+                CoroutineScope(Dispatchers.IO).launch {
+                    theViewModel.createAnewAccount()
+                }
+            }
+
+            theViewModel.theResultFromNewAccountCreation.observe(viewLifecycleOwner ,{
+                it?.let {
+                    if (it)
                     {
-                       var theSafe= theViewModel.safeTheUserInDB()
-                        if (theSafe==null)
-                        {
-                            Snackbar.make(requireView(), "failed to create an account", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
-                                R.color.colorAccent))
-                                .show()
-                            theViewModel.signOut()
-
-                        }
-                        else
-                        {
-                            theSafe.addOnCompleteListener {it1->
-                                if (it1.isSuccessful)
-                                {
-
-                                    Snackbar.make(requireView(), "account created successfully.." +
-                                            "Please Log In", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
-                                        R.color.colorAccent))
-                                        .show()
-
-                                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLogInFragment())
-                                 //   theViewModel.cteateTheToken()
-                                }
-                                else
-                                {
-                                    Snackbar.make(requireView(), "failed to create an account", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
-                                        R.color.colorAccent))
-                                        .show()
-                                    theViewModel.signOut()
-                                }
-
-                            }
+                        Snackbar.make(requireView(), "Account Created successfully ..please log in again", Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
+                            R.color.colorAccent))
+                            .show()
+                      //  theViewModel.signOut()
+                        if (findNavController().currentDestination!!.id==R.id.signUpFragment) {
+                            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLogInFragment())
                         }
                     }
                     else
                     {
-                        Snackbar.make(requireView(), it.exception?.message.toString(), Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
-                            R.color.colorAccent))
-                            .show()
-                        theViewModel.signOut()
-
-                        theViewModel.signOut()
-
+                        theViewModel.theError.observe(viewLifecycleOwner,{error1->
+                            error1?.let {
+                                Snackbar.make(requireView(), error1, Snackbar.LENGTH_SHORT).setBackgroundTint(requireContext().getColor(
+                                    R.color.colorAccent))
+                                    .show()
+                            }
+                        })
                     }
                 }
-            }
-
+            })
 
         }
 
     }
 
 
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+        // For 29 api or above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork) ?: return false
+            return when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ->    true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) ->   true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ->   true
+                else ->     false
+            }
+        }
+        // For below 29 api
+        else {
+            if (connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!.isConnectedOrConnecting) {
+                return true
+            }
+        }
+        return false
+    }
 
 }

@@ -1,55 +1,102 @@
 package com.example.kiwi.ui.profile
 
-import android.os.Build
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kiwi.NoFCMService.FirebaseService
+import com.example.kiwi.Logics.User
 import com.example.kiwi.Repos.TheAppRepo
-import com.example.kiwi.RoomDataBase.ThePostForRoom
-import com.example.kiwi.RoomDataBase.ThePostsDataBase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel  @ViewModelInject constructor(private val theAppRepoforall: TheAppRepo): ViewModel()  {
-var thefolloing:TextView?=null
-var thefollower:TextView?=null
-var theuserName:TextView?=null
-var theBio:TextView?=null
-var circleImageView:ImageView?=null
+val thefollowing:MutableLiveData<String> = MutableLiveData()
+val theUserDetails:MutableLiveData<User> = MutableLiveData()
+val thefollower:MutableLiveData<String> =MutableLiveData()
+val haveItems:MutableLiveData<Boolean> =MutableLiveData()
+    val netWorkFound:MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getTheViewFollowing(thefolloing1:TextView)
-    {
-        thefolloing=thefolloing1
+
+
+    fun getfollowing(){
+        FirebaseDatabase.getInstance().reference.child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid).child("Following")
+            .addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    viewModelScope.launch(Dispatchers.Main) {
+                        thefollowing.value=snapshot.childrenCount.toString()
+
+                    }
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
-    fun getTheViewFollowers(thefollower1:TextView)
-    {
-        thefollower=thefollower1
+
+    fun getfollowers(){
+      FirebaseDatabase.getInstance().reference.child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid).child("Followers")
+        .addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    viewModelScope.launch(Dispatchers.Main) {
+
+                        thefollower.value = snapshot.childrenCount.toString()
+                    }
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+    fun getTheUserDetails(){
+        val theFollowingIdentfier =   FirebaseDatabase.getInstance().reference.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+        theFollowingIdentfier.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    viewModelScope.launch(Dispatchers.Main) {
+
+                        theUserDetails.value = snapshot.getValue(User::class.java)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
-    fun getfollowing()=theAppRepoforall.getfollowing(thefolloing!!)
-    fun getfolloers()=theAppRepoforall.getfollowers(thefollower!!)
-    fun getTheUserDetails()=theAppRepoforall.getTheuserInfo(theuserName!!,circleImageView!!,theBio!!)
 
 
 
-  fun  getTheuserInfo(ProfileUserName1:TextView,circleImageView1:ImageView,BioINProfile1:TextView)
-    {
-        theuserName=ProfileUserName1
-        theBio=BioINProfile1
-        circleImageView=circleImageView1
-
-    }
     fun getThePosts()=theAppRepoforall.theFinalGetEmAll()
+    fun subsToMyNots()
+    {
 
-    fun subsToMyNots() = viewModelScope.launch {  theAppRepoforall.subsToMyNots()}
+            FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
+                FirebaseDatabase.getInstance().reference.child("UsersTokens").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(it.token)
+                val TOPIC = "/topics/${it.token}"
+                FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    val isOnline:Boolean= theAppRepoforall. isOnline()
+        }
+    }
+
+
+
 
 
 

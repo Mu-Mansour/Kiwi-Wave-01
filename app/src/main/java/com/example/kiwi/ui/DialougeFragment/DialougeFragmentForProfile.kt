@@ -1,17 +1,13 @@
 package com.example.kiwi.ui.DialougeFragment
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.navigation.fragment.findNavController
-import com.example.kiwi.R
 import com.example.kiwi.Repos.TheAppRepo
 import com.example.kiwi.RoomDataBase.ThePostForRoom
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

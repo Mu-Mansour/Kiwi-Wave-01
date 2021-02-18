@@ -7,7 +7,7 @@
 
     android:background="@color/colorPrimaryDark"
     app:layoutDescription="@xml/fragment_splaaaaaaash_scene"
-    tools:context=".ui.Splash.splaaaaaaash">
+    tools:context=".ui.Splash.Splaaaaaaash">
 
     <ImageView
         android:id="@+id/imageView15"
